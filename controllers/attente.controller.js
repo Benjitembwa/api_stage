@@ -12,6 +12,10 @@ export const creerAttente = async (req, res) => {
       objet,
       proprietaire,
       proprietaireModel,
+      lieuMission,
+      dateDebut,
+      dateFin,
+      motifMission,
     } = req.body;
 
     if (!destinataire || !typeDocument || !objet || !proprietaire) {
@@ -30,6 +34,10 @@ export const creerAttente = async (req, res) => {
       objet,
       proprietaire,
       proprietaireModel,
+      lieuMission,
+      dateDebut,
+      dateFin,
+      motifMission,
     });
 
     await nouvelleAttente.save();
@@ -129,6 +137,10 @@ export const approuverAttente = async (req, res) => {
       proprietaireModel: attente.proprietaireModel,
       codeUnique: nanoid(8),
       status: "Approuvé",
+      lieuMission: attente.lieuMission,
+      dateDebut: attente.dateDebut,
+      dateFin: attente.dateFin,
+      motifMission: attente.motifMission,
     });
 
     await nouveauDocument.save();

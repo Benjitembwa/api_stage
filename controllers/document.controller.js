@@ -16,7 +16,9 @@ export const getAllDocuments = async (req, res) => {
             .populate("promotion")
             .lean();
         } else if (doc.proprietaireModel === "Personnel") {
-          proprietaireData = await Personnel.findById(doc.proprietaire).lean();
+          proprietaireData = await Personnel.findById(doc.proprietaire)
+            .populate("mention")
+            .lean();
         }
 
         return {

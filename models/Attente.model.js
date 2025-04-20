@@ -30,6 +30,10 @@ const attenteSchema = new mongoose.Schema(
       enum: ["En attente", "Rejeté"],
       default: "En attente",
     },
+    lieuMission: String,
+    dateDebut: Date,
+    dateFin: Date,
+    motifMission: String,
   },
   { timestamps: true }
 );

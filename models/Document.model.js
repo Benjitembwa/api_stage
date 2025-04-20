@@ -34,6 +34,10 @@ const documentSchema = new mongoose.Schema(
       type: String,
       enum: ["Approuvé"],
     },
+    lieuMission: String,
+    dateDebut: Date,
+    dateFin: Date,
+    motifMission: String,
   },
   { timestamps: true }
 );
