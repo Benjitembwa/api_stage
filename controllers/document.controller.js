@@ -34,3 +34,31 @@ export const getAllDocuments = async (req, res) => {
     res.status(500).json({ message: "Erreur serveur" });
   }
 };
+
+export const getDocumentsByProprietaire = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const documents = await Document.find({ proprietaire: id }).populate(
+      "typeDocument"
+    );
+
+    // Populate dynamiquement selon le modèle
+    const populatedDocs = await Promise.all(
+      documents.map(async (doc) => {
+        const model =
+          doc.proprietaireModel === "Etudiant" ? Etudiant : Personnel;
+        const populatedProprietaire = await model.findById(doc.proprietaire);
+
+        return {
+          ...doc.toObject(),
+          proprietaire: populatedProprietaire,
+        };
+      })
+    );
+
+    res.status(200).json(populatedDocs);
+  } catch (err) {
+    res.status(500).json({ message: "Erreur lors de la récupération", err });
+  }
+};

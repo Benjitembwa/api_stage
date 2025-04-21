@@ -3,7 +3,7 @@ import Personnel from "../models/Personnel.model.js";
 
 export const registerPersonnel = async (req, res) => {
   try {
-    const { nom, email, motDePasse, mention } = req.body;
+    const { nom, postNom, prenom, email, motDePasse, mention } = req.body;
     console.log(req.body);
     const existing = await Personnel.findOne({ email });
     if (existing) {
@@ -14,6 +14,8 @@ export const registerPersonnel = async (req, res) => {
 
     const nouveauPersonnel = new Personnel({
       nom,
+      postNom,
+      prenom,
       email,
       motDePasse: hashedPassword,
       mention,
@@ -49,6 +51,8 @@ export const loginPersonnel = async (req, res) => {
       utilisateur: {
         id: personnel._id,
         nom: personnel.nom,
+        postNom: personnel.postNom,
+        prenom: personnel.prenom,
         email: personnel.email,
         role: personnel.role,
         mention: personnel.mention,

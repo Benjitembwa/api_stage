@@ -13,6 +13,7 @@ import attenteRoutes from "./routes/attente.routes.js";
 import utilisateursRoutes from "./routes/utilisateurs.route.js";
 import documentRoutes from "./routes/document.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import statisticsRoutes from "./routes/statistics.route.js";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/api/attentes", attenteRoutes);
 app.use("/api/utilisateurs", utilisateursRoutes);
 app.use("/api/documents", documentRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/stats", statisticsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello from Express!");
